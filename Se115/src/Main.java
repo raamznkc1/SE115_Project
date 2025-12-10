@@ -44,7 +44,18 @@ public class Main {
     }
 
     public static int totalProfitOnDay(int month, int day) {
-        return 1234;
+        if (month < 0 || month >= MONTHS || day < 1 || day > DAYS) {
+            return -9999;
+        }
+
+        int dayIndex = day - 1;
+        long totalProfit = 0;
+
+        for (int comm = 0; comm < COMMS; comm++) {
+            totalProfit += profitData[month][dayIndex][comm];
+        }
+
+        return (int) totalProfit;
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
