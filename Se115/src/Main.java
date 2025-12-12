@@ -45,7 +45,7 @@ public class Main {
 
     public static int totalProfitOnDay(int month, int day) {
         if (month < 0 || month >= MONTHS || day < 1 || day > DAYS) {
-            return -9999;
+            return -99999;
         }
 
         int dayIndex = day - 1;
@@ -59,35 +59,60 @@ public class Main {
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
+        long totalProfit = 0;
+
+        if (from < 1 || from > DAYS || to < 1 || to > DAYS || from > to) {
+            return -99999;
+        }
+
+        int commIndex = -1;
+        for (int i = 0; i < commodities.length; i++) {
+            if (commodities[i].equals(commodity)) {
+                commIndex = i;
+                break;
+            }
+        }
+
+        if (commIndex == -1) {
+            return -99999;
+        }
+
+        for (int monthIndex = 0; monthIndex < MONTHS; monthIndex++) {
+            for (int day = from; day <= to; day++) {
+                int dayIndex = day - 1;
+                totalProfit += profitData[monthIndex][dayIndex][commIndex];
+            }
+        }
+
+        return (int) totalProfit;
+    }
+
+    public static int bestDayOfMonth(int month) {
         return 1234;
     }
 
-    public static int bestDayOfMonth(int month) { 
-        return 1234; 
-    }
-    
-    public static String bestMonthForCommodity(String comm) { 
-        return "DUMMY"; 
+    public static String bestMonthForCommodity(String comm) {
+        return "DUMMY";
     }
 
-    public static int consecutiveLossDays(String comm) { 
-        return 1234; 
-    }
-    
-    public static int daysAboveThreshold(String comm, int threshold) { 
-        return 1234; 
+    public static int consecutiveLossDays(String comm) {
+        return 1234;
     }
 
-    public static int biggestDailySwing(int month) { 
-        return 1234; 
+    public static int daysAboveThreshold(String comm, int threshold) {
+        return 1234;
     }
-    
-    public static String compareTwoCommodities(String c1, String c2) { 
-        return "DUMMY is better by 1234"; 
+
+    public static int biggestDailySwing(int month) {
+        return 1234;
     }
-    
-    public static String bestWeekOfMonth(int month) { 
-        return "DUMMY"; 
+
+    public static String compareTwoCommodities(String c1, String c2) {
+        return "DUMMY is better by 1234";
+    }
+
+    public static String bestWeekOfMonth(int month) {
+        return "DUMMY";
     }
 
     public static void main(String[] args) {
