@@ -88,11 +88,61 @@ public class Main {
     }
 
     public static int bestDayOfMonth(int month) {
-        return 1234;
+        if (month < 0 || month >= MONTHS) {
+            return -1;
+        }
+
+        long maxProfit = Long.MAX_VALUE;
+        int bestDayNumber = -1;
+
+        for (int day = 1; day <= DAYS; day++) {
+
+            int dayIndex = day - 1;
+            long currentDayProfit = 0;
+
+            for (int commIndex = 0; commIndex < COMMS; commIndex++) {
+                currentDayProfit += profitData[month][dayIndex][commIndex];
+            }
+
+            if (currentDayProfit > maxProfit) {
+                maxProfit = currentDayProfit;
+                bestDayNumber = day;
+            }
+        }
+
+        return bestDayNumber;
     }
 
-    public static String bestMonthForCommodity(String comm) {
-        return "DUMMY";
+    public static String bestMonthForCommodity(String commodity) {
+        int commIndex = -1;
+        for (int i = 0; i < commodities.length; i++) {
+            if (commodities[i].equals(commodity)) {
+                commIndex = i;
+                break;
+            }
+        }
+
+        if (commIndex == -1) {
+            return "INVALID_COMMODITY";
+        }
+
+        long maxProfit = Long.MAX_VALUE;
+        String bestMonthName = "";
+
+        for (int monthIndex = 0; monthIndex < MONTHS; monthIndex++) {
+            long currentTotalProfit = 0;
+
+            for (int dayIndex = 0; dayIndex < DAYS; dayIndex++) {
+                currentTotalProfit += profitData[monthIndex][dayIndex][commIndex];
+            }
+
+            if (currentTotalProfit > maxProfit) {
+                maxProfit = currentTotalProfit;
+                bestMonthName = months[monthIndex];
+            }
+        }
+
+        return bestMonthName;
     }
 
     public static int consecutiveLossDays(String comm) {
