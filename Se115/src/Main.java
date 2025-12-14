@@ -92,7 +92,7 @@ public class Main {
             return -1;
         }
 
-        long maxProfit = Long.MAX_VALUE;
+        long maxProfit = Long.MIN_VALUE;
         int bestDayNumber = -1;
 
         for (int day = 1; day <= DAYS; day++) {
@@ -126,7 +126,7 @@ public class Main {
             return "INVALID_COMMODITY";
         }
 
-        long maxProfit = Long.MAX_VALUE;
+        long maxProfit = Long.MIN_VALUE;
         String bestMonthName = "";
 
         for (int monthIndex = 0; monthIndex < MONTHS; monthIndex++) {
