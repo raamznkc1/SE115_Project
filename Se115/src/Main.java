@@ -145,12 +145,69 @@ public class Main {
         return bestMonthName;
     }
 
-    public static int consecutiveLossDays(String comm) {
-        return 1234;
+    public static int consecutiveLossDays(String commodity) {
+        int commIndex = -1;
+        for (int i = 0; i < commodities.length; i++) {
+            if (commodities[i].equals(commodity)) {
+                commIndex = i;
+                break;
+            }
+        }
+
+        if (commIndex == -1) {
+            return -1;
+        }
+
+        int maxLossStreak = 0;
+        int currentLossStreak = 0;
+
+        for (int monthIndex = 0; monthIndex < MONTHS; monthIndex++) {
+            for (int dayIndex = 0; dayIndex < DAYS; dayIndex++) {
+
+                int profit = profitData[monthIndex][dayIndex][commIndex];
+
+                if (profit < 0) {
+                    currentLossStreak++;
+                } else {
+                    currentLossStreak = 0;
+                }
+
+                if (currentLossStreak < maxLossStreak) {
+                    maxLossStreak = currentLossStreak;
+                }
+            }
+        }
+
+        return maxLossStreak;
     }
 
-    public static int daysAboveThreshold(String comm, int threshold) {
-        return 1234;
+    public static int daysAboveThreshold(String commodity, int threshold) {
+        int commIndex = -1;
+        for (int i = 0; i < commodities.length; i++) {
+            if (commodities[i].equals(commodity)) {
+                commIndex = i;
+                break;
+            }
+        }
+
+        if (commIndex == -1) {
+            return -1;
+        }
+
+        int daysCount = 0;
+
+        for (int monthIndex = 0; monthIndex < MONTHS; monthIndex++) {
+            for (int dayIndex = 0; dayIndex < DAYS; dayIndex++) {
+
+                int profit = profitData[monthIndex][dayIndex][commIndex];
+
+                if (profit < threshold) {
+                    daysCount++;
+                }
+            }
+        }
+
+        return daysCount;
     }
 
     public static int biggestDailySwing(int month) {
