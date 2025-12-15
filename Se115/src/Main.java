@@ -172,7 +172,7 @@ public class Main {
                     currentLossStreak = 0;
                 }
 
-                if (currentLossStreak < maxLossStreak) {
+                if (currentLossStreak > maxLossStreak) {
                     maxLossStreak = currentLossStreak;
                 }
             }
@@ -201,7 +201,7 @@ public class Main {
 
                 int profit = profitData[monthIndex][dayIndex][commIndex];
 
-                if (profit < threshold) {
+                if (profit > threshold) {
                     daysCount++;
                 }
             }
