@@ -211,7 +211,35 @@ public class Main {
     }
 
     public static int biggestDailySwing(int month) {
-        return 1234;
+        if (month < 0 || month >= MONTHS) {
+            return -1;
+        }
+
+        long maxSwing = 0;
+        long previousDayTotalProfit = 0;
+
+        for (int commIndex = 0; commIndex < COMMS; commIndex++) {
+            previousDayTotalProfit += profitData[month][0][commIndex];
+        }
+
+        for (int dayIndex = 1; dayIndex < DAYS; dayIndex++) {
+
+            long currentDayTotalProfit = 0;
+
+            for (int commIndex = 0; commIndex < COMMS; commIndex++) {
+                currentDayTotalProfit += profitData[month][dayIndex][commIndex];
+            }
+
+            long swing = Math.abs(currentDayTotalProfit - previousDayTotalProfit);
+
+            if (swing > maxSwing) {
+                maxSwing = swing;
+            }
+
+            previousDayTotalProfit = currentDayTotalProfit;
+        }
+
+        return (int) maxSwing;
     }
 
     public static String compareTwoCommodities(String c1, String c2) {
