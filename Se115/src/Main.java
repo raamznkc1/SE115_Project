@@ -113,10 +113,10 @@ public class Main {
         return bestDayNumber;
     }
 
-    public static String bestMonthForCommodity(String commodity) {
+    public static String bestMonthForCommodity(String comm ) {
         int commIndex = -1;
         for (int i = 0; i < commodities.length; i++) {
-            if (commodities[i].equals(commodity)) {
+            if (commodities[i].equals(comm)) {
                 commIndex = i;
                 break;
             }
@@ -145,10 +145,10 @@ public class Main {
         return bestMonthName;
     }
 
-    public static int consecutiveLossDays(String commodity) {
+    public static int consecutiveLossDays(String comm ) {
         int commIndex = -1;
         for (int i = 0; i < commodities.length; i++) {
-            if (commodities[i].equals(commodity)) {
+            if (commodities[i].equals(comm)) {
                 commIndex = i;
                 break;
             }
@@ -181,10 +181,10 @@ public class Main {
         return maxLossStreak;
     }
 
-    public static int daysAboveThreshold(String commodity, int threshold) {
+    public static int daysAboveThreshold(String comm , int threshold) {
         int commIndex = -1;
         for (int i = 0; i < commodities.length; i++) {
-            if (commodities[i].equals(commodity)) {
+            if (commodities[i].equals(comm)) {
                 commIndex = i;
                 break;
             }
