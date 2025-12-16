@@ -243,11 +243,83 @@ public class Main {
     }
 
     public static String compareTwoCommodities(String c1, String c2) {
-        return "DUMMY is better by 1234";
+        int c1Index = -1;
+        for (int i = 0; i < commodities.length; i++) {
+            if (commodities[i].equals(c1)) {
+                c1Index = i;
+                break;
+            }
+        }
+        if (c1Index == -1) {
+            return "INVALID_COMMODITY";
+        }
+
+        int c2Index = -1;
+        for (int i = 0; i < commodities.length; i++) {
+            if (commodities[i].equals(c2)) {
+                c2Index = i;
+                break;
+            }
+        }
+        if (c2Index == -1) {
+            return "INVALID_COMMODITY";
+        }
+
+        long c1TotalProfit = 0;
+        long c2TotalProfit = 0;
+
+        for (int monthIndex = 0; monthIndex < MONTHS; monthIndex++) {
+            for (int dayIndex = 0; dayIndex < DAYS; dayIndex++) {
+                c1TotalProfit += profitData[monthIndex][dayIndex][c1Index];
+                c2TotalProfit += profitData[monthIndex][dayIndex][c2Index];
+            }
+        }
+
+        long difference = Math.abs(c1TotalProfit - c2TotalProfit);
+
+        if (c1TotalProfit > c2TotalProfit) {
+            return c1 + " is better by " + difference;
+        } else if (c2TotalProfit > c1TotalProfit) {
+            return c2 + " is better by " + difference;
+        } else {
+            return "Equal";
+        }
     }
 
     public static String bestWeekOfMonth(int month) {
-        return "DUMMY";
+        if (month < 0 || month >= MONTHS) {
+            return "INVALID_MONTH";
+        }
+
+        long maxProfit = Long.MIN_VALUE;
+        String bestWeekName = "";
+
+        int[] startDays = {1, 8, 15, 22};
+        int numberOfWeeks = 4;
+
+        for (int week = 0; week < numberOfWeeks; week++) {
+
+            long currentWeekProfit = 0;
+
+            int startDay = startDays[week];
+            int endDay = startDay + 6;
+
+            for (int day = startDay; day <= endDay; day++) {
+
+                int dayIndex = day - 1;
+
+                for (int commIndex = 0; commIndex < COMMS; commIndex++) {
+                    currentWeekProfit += profitData[month][dayIndex][commIndex];
+                }
+            }
+
+            if (currentWeekProfit > maxProfit) {
+                maxProfit = currentWeekProfit;
+                bestWeekName = "Week " + (week + 1);
+            }
+        }
+
+        return bestWeekName;
     }
 
     public static void main(String[] args) {
