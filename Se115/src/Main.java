@@ -263,7 +263,7 @@ public class Main {
 
     public static int biggestDailySwing(int month) {
         if (month < 0 || month >= MONTHS) {
-            return -1;
+            return -99999;
         }
 
         long maxSwing = 0;
