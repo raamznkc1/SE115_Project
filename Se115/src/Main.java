@@ -1,5 +1,6 @@
 // Main.java — Students version
 import java.io.*;
+import java.nio.file.*;
 import java.util.*;
 
 public class Main {
@@ -15,6 +16,56 @@ public class Main {
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
+
+        profitData = new int[MONTHS][DAYS][COMMS];
+
+        for (int monthIndex = 0; monthIndex < MONTHS; monthIndex++) {
+
+            String fileName = "Data_Files/" + months[monthIndex] + ".txt";
+            Scanner reader = null;
+
+            try {
+                reader = new Scanner(Paths.get(fileName));
+
+                while (reader.hasNextLine()) {
+
+                    String line = reader.nextLine();
+                    String[] parts = line.split(",");
+
+                    if (parts.length != 3) continue;
+
+                    try {
+                        int day = Integer.parseInt(parts[0].trim());
+                        int dayIndex = day - 1;
+
+                        String commodityName = parts[1].trim();
+                        int commIndex = -1;
+
+                        for (int i = 0; i < commodities.length; i++) {
+                            if (commodities[i].equals(commodityName)) {
+                                commIndex = i;
+                                break;
+                            }
+                        }
+
+                        int profit = Integer.parseInt(parts[2].trim());
+
+                        if (dayIndex >= 0 && dayIndex < DAYS && commIndex != -1) {
+                            profitData[monthIndex][dayIndex][commIndex] = profit;
+                        }
+
+                    } catch (NumberFormatException e) {
+                        continue;
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error: File read error: " + fileName);
+            } finally {
+                if (reader != null) {
+                    reader.close();
+                }
+            }
+        }
     }
 
     // ======== 10 REQUIRED METHODS (Students fill these) ========
